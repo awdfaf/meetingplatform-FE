@@ -1,0 +1,13 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1A202C; 
+  padding: 1rem 0; 
+  display: flex;
+  justify-content: center;
+}
+/* .footerHeight {
+  height: 70px;  
+} */

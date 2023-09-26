@@ -1,0 +1,46 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.5s;
+  background-color: transparent;
+}
+
+.header.scrolled {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  color: #4A4A4A;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #7A7A7A;
+}
+
+/* .content {
+  height: 100vh;
+  background-color: #F0F0F0;
+} */
