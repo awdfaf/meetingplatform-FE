@@ -53,8 +53,8 @@ export default function TossPaymentsButton() {
     try {
       if (paymentWidget) {
         await paymentWidget.requestPayment({
-          orderId: "tMt42SMd_E1OL7khJFgeS",
-          orderName: "토스 티셔츠 외 2건",
+          orderId: "wnansqjsgh8",
+          orderName: "moa8join",
           customerName: "김토스",
           customerEmail: "customer123@gmail.com",
           customerMobilePhone: "01012341234",

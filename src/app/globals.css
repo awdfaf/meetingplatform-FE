@@ -24,3 +24,38 @@
         opacity: 1;
     }
 }
+
+.custom-lable {
+    width: 30px;
+    height: 30px;
+    background-color: #3a31b9;
+    color: white;
+    border-radius: 50%;
+    position: relative;
+    top: 15px;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agree-check {
+    font-size: 0.8rem;
+    color: gray;
+}
+.check-btn {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 1px solid #cccccc80;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+.check-btn.active {
+    background-color: #3a31b9;
+    border: 1px solid #3a31b9;
+    transition: all 0.3s ease-in-out;
+}

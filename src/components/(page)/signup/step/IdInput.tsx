@@ -85,11 +85,15 @@ function IdInput({ signUpData, setSignUpData, active, setActive, stepId }: IdInp
   return (
     <main className='container mt-10 mb-5'>
       {/* <h1 className='text-md text-bold text-center mb-10'>이메일을 입력해주세요.</h1> */}
+      <div className='tracking-tighter mb-8'>
+        <p className='text-lg font-semibold text-center'>모아 회원가입</p>
+        <p className="text-xs text-center text-gray-500">자주 사용하시는 메일을 입력하실 것을 추천드립니다.</p>
+      </div>
       <form onSubmit={checkId} className='flex justify-center gap-3 items-center'>
         <input
-          className='border-2 border-[#E5E7EB] text-[0.7rem] rounded-full w-[250px] h-[40px] px-3 placeholder:text-[#9CA3AF80] placeholder:text-[0.8rem]'
+          className='border-2 border-[#E5E7EB] text-[0.8rem] rounded-full w-[250px] h-[40px] px-3 placeholder:text-[#9CA3AF80] placeholder:text-[0.8rem]'
           type="text"
-          name="userId"
+          name="loginId"
           placeholder="이메일을 입력해주세요."
           onChange={handleOnChange}
           defaultValue={signUpData.loginId}

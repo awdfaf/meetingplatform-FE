@@ -21,11 +21,11 @@ function page() {
       
       <div>
       <p>이메일</p>
-      <PhoneInput setRemainingTime={function (value: React.SetStateAction<number>): void {
+{/*       <PhoneInput setRemainingTime={function (value: React.SetStateAction<number>): void {
         throw new Error('Function not implemented.');
         }
         }
-        />
+        /> */}
         </div>
     </main>
     </>

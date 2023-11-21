@@ -3,6 +3,13 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
   },
+
+  env: {
+    AWS_REGION:process.env.AWS_REGION,
+    ACCESS_KEY:process.env.ACCESS_KEY,
+    SECRET_KEY:process.env.SECRET_KEY,
+    BUCKET_NAME:process.env.BUCKET_NAME,
+  },
 /*   env:{
     TOSS_SECRET_SECRET:process.env.TOSS_SECRET_SECRET
   }, */

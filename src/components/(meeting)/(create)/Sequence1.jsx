@@ -40,8 +40,13 @@ export default function Sequence1(props) {
 
   return (
     <>
-      <Heading desc={"모임을 선택하세요"} isCenter={false}>어떤 모임을 하고싶나요?</Heading>
-      <div className="flex flex-col gap-2">
+{/*       <Heading desc={"모임을 선택하세요"} isCenter={false}>어떤 모임을 하고싶나요?</Heading> */}
+
+      <div className='tracking-tighter mb-8'>
+        <p className='text-lg font-semibold text-center'>어떤 모임을 하고싶나요?</p>
+        <p className="text-xs text-center text-gray-500">모임을 선택하세요</p>
+      </div>
+      <div className="flex flex-col gap-2 mx-auto">
         <ListboxWrapper>
           <Listbox
             aria-label="Single selection example"
@@ -54,8 +59,9 @@ export default function Sequence1(props) {
             <ListboxItem key="ready">준비중</ListboxItem>
           </Listbox>
         </ListboxWrapper>
-        <button onClick={handleNext}>Next</button>
       </div>
+      <button onClick={handleNext}>Next</button>
+
     </>
   );
 }

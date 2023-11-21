@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { options } from '@/app/api/auth/[...nextauth]/options'
 import OtherLogin from '@/components/(page)/login/OtherLogin'
 import Heading from '@/components/Heading/Heading2'
+import LogoSvg from '@/components/Logo/LogoSvg'
 
 export const metadata = {
   title: '모아 - 로그인',
@@ -22,14 +23,14 @@ export default async function otherLoginPage() {
   return (
   <>
     <main>
-      <div className='bg-white'>
-      <header className="text-center max-w-2xl mx-auto - mb-14 sm:mb-16 lg:mb-20">
-        <Heading>Login</Heading>
-        <span className="block text-sm mt-2 text-neutral-700 sm:text-base dark:text-neutral-200">
-          Welcome to moA-Meeting applications
-        </span>
-      </header>
+      <div className='bg-white pt-10'>
+      <div className='flex justify-start m-auto w-[180px] h-auto py-10'>
+        <LogoSvg />
+      </div>
+
+      <div className='mt-5'>
         <OtherLogin />
+      </div>
       </div>
     </main>
   </>

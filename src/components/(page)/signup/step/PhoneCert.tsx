@@ -24,10 +24,10 @@ function PhoneCert({ signUpData, setSignUpData, active, setActive, stepId }: IdI
         <p className='text-sm mt-3 font-medium'>본인명의의 휴대전화번호를 입력해주세요. </p>
       </div>
 
-      <PhoneInput setRemainingTime={function (value: React.SetStateAction<number>): void {
+      {/* <PhoneInput setRemainingTime={function (value: React.SetStateAction<number>): void {
           throw new Error('Function not implemented.');
         }}
-        />
+        /> */}
 
     </main>
     </>

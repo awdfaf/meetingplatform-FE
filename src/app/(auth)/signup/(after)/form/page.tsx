@@ -1,4 +1,4 @@
-import FormArea from '@/components/(page)/signup/FormArea'
+import FormArea from '@/components/(page)/signup/step/FormArea'
 import Step from '@/components/(page)/signup/step/JoinStep'
 import React from 'react'
 

@@ -60,16 +60,33 @@ export default function Sequence2(props) {
 
   return (
     <>
-      <Heading desc={"카테고리를 선택하세요"}>어떤 주제로 모임을 하고싶나요?</Heading>
-      <div className="flex flex-col gap-2">
+      <div className='tracking-tighter mb-8'>
+        <p className='text-lg font-semibold text-center'>어떤 주제로 모임을 하고싶나요?</p>
+        <p className="text-xs text-center text-gray-500">카테고리를 선택하세요</p>
+      </div>
+
+      <div className='flex flex-col justify-center items-center relative'>
+        <div className='flex flex-col justify-start md:w-[80%] w-full transition-all'>
+          <label className='text-[0.75rem] text-gray-500 bg-white -mb-3 ml-5 z-50 w-fit px-2'>주제</label>
+          <input
+            className='border-2 border-[#E5E7EB] text-[0.8rem] rounded-full px-5 h-[50px] placeholder:text-[#9CA3AF80] placeholder:text-[0.8rem]'
+            value={inputThemeCategoryId}
+            onChange={(e) => setInputThemeCategoryId(e.target.value)}
+          />
+        </div>
+        <button onClick={handleNext}>Next</button>
+      </div>
+
+{/*       <div className="flex flex-col gap-2">
         <p className="text-small text-default-500">Selected value: {selectedValue}</p>
         <input
           type="text"
+          className=''
           value={inputThemeCategoryId}
           onChange={(e) => setInputThemeCategoryId(e.target.value)}
         />
         <button onClick={handleNext}>Next</button>
-      </div>
+      </div> */}
       <Accordion variant="splitted">
         <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
           <Box sx={{ flexGrow: 1 }}>

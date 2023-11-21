@@ -41,7 +41,35 @@ export default function Sequence4(props) {
 
   return (
     <>
+
+      <div className='tracking-tighter mb-8'>
+        <p className='text-lg font-semibold text-center'>모임을 소개해 주세요</p>
+        <p className="text-xs text-center text-gray-500">소개글이 참신하고 자세할수록 좋은 인연을 만날 수 있겠죠?</p>
+      </div>
+
+      <div className='flex flex-col justify-center items-center relative'>
+        <div className='flex flex-col justify-start md:w-[80%] w-full transition-all'>
+
+          
+          <label className='text-[0.75rem] text-gray-500 bg-white -mb-3 ml-5 z-50 w-fit px-2'>모임명</label>
+          <input
+            className='border-2 border-[#E5E7EB] text-[0.8rem] rounded-full px-5 h-[50px] placeholder:text-[#9CA3AF80] placeholder:text-[0.8rem]'
+            type="text"
+            value={inputDescription}
+            onChange={(e) => setInputDescription(e.target.value)}
+          />
+
+          <input
+            className='border-2 border-[#E5E7EB] text-[0.8rem] rounded-full px-5 h-[50px] placeholder:text-[#9CA3AF80] placeholder:text-[0.8rem] mt-5'
+            type="text"
+            value={inputHeaderImageUrl}
+            onChange={(e) => setInputHeaderImageUrl(e.target.value)}
+          />
+        </div>
+
+        <div className='mt-5 w-full md:w-[80%]'>
       <input type="file" accept="image/*"
+        className='file:text-xs file:bg-[#f7852e] file:border-none file:text-white file:px-6 file:rounded-full file:text-end file:h-10 file:font-semibold file:mr-2 border-2 border-[#E5E7EB] rounded-full w-full text-[0.8rem] pr-6'
         onChange={async (e) => {
           // 파일명 얻기
           let file = e.target.files[0]
@@ -79,10 +107,13 @@ export default function Sequence4(props) {
       />
       {/* 이미지 출력 */}
       <img src={src} />
+      </div>
+      <button onClick={handleNext}>Next</button>
+      </div>
 
 
-      <Heading desc={""}>모임을 소개해주세요</Heading>
-      <div className="flex flex-col gap-2">
+
+{/*       <div className="flex flex-col gap-2">
         <p className="text-small text-default-500">Selected value: {selectedValue}</p>
         <input
           type="text"
@@ -95,7 +126,7 @@ export default function Sequence4(props) {
           onChange={(e) => setInputHeaderImageUrl(e.target.value)}
         />
         <button onClick={handleNext}>Next</button>
-      </div>
+      </div> */}
     </>
   );
 }

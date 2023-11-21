@@ -104,9 +104,6 @@ export default function Loginarea() {
     }
   };
 
-  // TODO 여기 살리기
-
-
 
   return (
     <div>
@@ -140,26 +137,7 @@ export default function Loginarea() {
           <Link href="/" id="pw00_btn" className={styles.ico_eye_slash}>비밀번호 보기</Link>
         </button>
       </div>
-      <div className={`${styles.chk_group_box} ${styles.col2}`}>
-        {/*         <div className={styles.chk_box}>
-          <input id="isAutoId"
-            type="checkbox"
-            name='isAutoId'
-            checked={loginData.isAutoId && true}
-            onChange={handleOnChange} />
-          <label htmlFor="isAutoId">아이디 저장</label>
-        </div> */}
-        <div className='grid place-items-center'>
-          <div className={styles.chk_box}>
-            <input id="isAutoLogin"
-              type="checkbox"
-              name='isAutoLogin'
-              onChange={handleOnChange} />
-            <label htmlFor="isAutoLogin">로그인 유지</label>
-          </div>
-        </div>
-      </div>
-      <div className='grid place-items-center mt-3'>
+      <div className='grid place-items-center mt-8'>
         <button onClick={handleLogin} className='h-[44px] w-[300px] bg-[#4338ca] rounded-2xl grid place-items-center text-white font-semibold'>로그인</button>
       </div>
       <ul className='grid place-items-center'>
