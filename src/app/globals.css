@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.my-swal .swal2-popup {
+    background-color: #3a31b9 !important;
+    border-color: #1a202c !important;
+    color: white !important;
+    font-size: 0.76rem !important;
+    text-align: center !important;
+}
+.my-swal .swal2-html-container {
+    width:fit-content !important;
+    margin: 0 auto !important;
+}
+
+@keyframes move-up {
+    0% {
+        bottom: -50px;
+        opacity: 0;
+    }
+    100% {
+        bottom: 0px;
+        opacity: 1;
+    }
+}

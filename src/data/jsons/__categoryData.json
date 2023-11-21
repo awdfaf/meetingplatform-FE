@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "문화ˑ예술",
+    "href": "/meeting/category/1/1",
+    "thumbnail": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80",
+    "count": 13,
+    "color": "indigo",
+    "tag": [{"id":1,"name":"전시","href": "/meeting/category/1/11"},{"id":2,"name":"영화","href": "/meeting/category/1/12"},{"id":3,"name":"페스티벌","href": "/meeting/category/1/13"},{"id":4,"name":"공연","href": "/meeting/category/1/14"},{"id":5,"name":"콘서트","href": "/meeting/category/1/15"},{"id":6,"name":"연극","href": "/meeting/category/1/16"},{"id":7,"name":"뮤지컬","href": "/meeting/category/1/17"},{"id":8,"name":"연주회","href": "/meeting/category/1/18"}]
+  },
+  {
+    "id": 2,
+    "name": "액티비티",
+    "href": "/meeting/category/2/2",
+    "thumbnail": "https://images.unsplash.com/photo-1485841890310-6a055c88698a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80",
+    "count": 16,
+    "color": "red",
+    "tag": [{"id":1,"name":"등산","href": "/meeting/category/2/19"},{"id":2,"name":"산책","href": "/meeting/category/2/20"},{"id":3,"name":"러닝","href": "/meeting/category/2/21"},{"id":4,"name":"배드민턴","href": "/meeting/category/2/22"},{"id":5,"name":"클라이밍","href": "/meeting/category/2/23"},{"id":6,"name":"축구","href": "/meeting/category/2/24"},{"id":7,"name":"야구","href": "/meeting/category/2/25"},{"id":8,"name":"헬스","href": "/meeting/category/2/26"},{"id":9,"name":"요가","href": "/meeting/category/2/27"},{"id":10,"name":"다이어트","href": "/meeting/category/2/28"},{"id":11,"name":"볼링","href": "/meeting/category/2/29"},{"id":12,"name":"필라테스","href": "/meeting/category/2/30"},{"id":13,"name":"자전거","href": "/meeting/category/2/31"},{"id":14,"name":"골프","href": "/meeting/category/2/32"},{"id":15,"name":"다이빙","href": "/meeting/category/2/33"},{"id":16,"name":"농구","href": "/meeting/category/2/34"},{"id":17,"name":"플로깅","href": "/meeting/category/2/35"},{"id":18,"name":"풋살","href": "/meeting/category/2/36"},{"id":19,"name":"서핑","href": "/meeting/category/2/37"},{"id":20,"name":"수영","href": "/meeting/category/2/38"}]
+  },
+  {
+    "id": 3,
+    "name": "푸드ˑ드링크",
+    "href": "/meeting/category/3/3",
+    "thumbnail": "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
+    "count": 15,
+    "color": "yellow",
+    "tag": [{"id":1,"name":"맛집투어","href": "/meeting/category/3/39"},{"id":2,"name":"카페","href": "/meeting/category/3/40"},{"id":3,"name":"와인","href": "/meeting/category/3/41"},{"id":4,"name":"요리","href": "/meeting/category/3/42"},{"id":5,"name":"칵테일","href": "/meeting/category/3/43"},{"id":6,"name":"맥주","href": "/meeting/category/3/44"},{"id":7,"name":"커피","href": "/meeting/category/3/45"},{"id":8,"name":"위스키","href": "/meeting/category/3/46"},{"id":9,"name":"전통주","href": "/meeting/category/3/47"},{"id":10,"name":"디저트","href": "/meeting/category/3/48"},{"id":11,"name":"파인다이닝","href": "/meeting/category/3/49"},{"id":12,"name":"페어링","href": "/meeting/category/3/50"},{"id":13,"name":"비건","href": "/meeting/category/3/51"},{"id":14,"name":"티룸","href": "/meeting/category/3/52"}]
+  },
+  {
+    "id": 4,
+    "name": "취미",
+    "href": "/meeting/category/4/4",
+    "thumbnail": "https://images.unsplash.com/photo-1491406213019-05b162a72c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
+    "count": 21,
+    "color": "pink",
+    "tag": [{"id":1,"name":"사진","href": "/meeting/category/4/53"},{"id":2,"name":"보드게임","href": "/meeting/category/4/54"},{"id":3,"name":"공예","href": "/meeting/category/4/55"},{"id":4,"name":"드로잉","href": "/meeting/category/4/56"},{"id":5,"name":"노래","href": "/meeting/category/4/57"},{"id":6,"name":"댄스","href": "/meeting/category/4/58"},{"id":7,"name":"글쓰기","href": "/meeting/category/4/59"},{"id":8,"name":"음악감상","href": "/meeting/category/4/60"},{"id":9,"name":"봉사활동","href": "/meeting/category/4/61"},{"id":10,"name":"게임","href": "/meeting/category/4/62"},{"id":11,"name":"악기연주","href": "/meeting/category/4/63"},{"id":12,"name":"방탈출","href": "/meeting/category/4/64"},{"id":13,"name":"영상","href": "/meeting/category/4/65"},{"id":14,"name":"켈리그라피","href": "/meeting/category/4/66"},{"id":15,"name":"반려동물","href": "/meeting/category/4/67"},{"id":16,"name":"만화","href": "/meeting/category/4/68"}]
+  },
+  {
+    "id": 5,
+    "name": "파티ˑ소개팅",
+    "href": "/meeting/category/5/5",
+    "thumbnail": "https://images.unsplash.com/photo-1528297506728-9533d2ac3fa4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "count": 16,
+    "color": "pink",
+    "tag": [{"id":1,"name":"파티","href": "/meeting/category/5/69"},{"id":2,"name":"소개팅","href": "/meeting/category/5/70"}]
+  },
+  {
+    "id": 6,
+    "name": "여행ˑ동행",
+    "href": "/meeting/category/6/6",
+    "thumbnail": "https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
+    "count": 25,
+    "color": "blue",
+    "tag": [{"id":1,"name":"국내여행","href": "/meeting/category/6/71"},{"id":2,"name":"해외여행","href": "/meeting/category/6/72"},{"id":3,"name":"캠핑","href": "/meeting/category/6/73"},{"id":4,"name":"피크닉","href": "/meeting/category/6/74"},{"id":5,"name":"테마파크","href": "/meeting/category/6/75"},{"id":6,"name":"드라이브","href": "/meeting/category/6/76"},{"id":7,"name":"복합문화공간","href": "/meeting/category/6/77"}]
+  },
+  {
+    "id": 7,
+    "name": "자기계발",
+    "href": "/meeting/category/7/7",
+    "thumbnail": "https://images.unsplash.com/photo-1498049794561-7780e7231661?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "count": 14,
+    "color": "gray",
+    "tag": [{"id":1,"name":"독서","href": "/meeting/category/7/78"},{"id":2,"name":"스터디","href": "/meeting/category/7/79"},{"id":3,"name":"대화","href": "/meeting/category/7/80"},{"id":4,"name":"브랜딩","href": "/meeting/category/7/81"},{"id":5,"name":"사이드프로젝트","href": "/meeting/category/7/82"},{"id":6,"name":"커리어","href": "/meeting/category/7/83"},{"id":7,"name":"창작","href": "/meeting/category/7/84"}]
+  },
+  {
+    "id": 8,
+    "name": "동네ˑ친목",
+    "href": "/meeting/category/8/8",
+    "thumbnail": "https://images.unsplash.com/photo-1512686096451-a15c19314d59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
+    "count": 4,
+    "color": "purple",
+    "tag": [{"id":1,"name":"관심사","href": "/meeting/category/8/85"},{"id":2,"name":"동네","href": "/meeting/category/8/86"},{"id":3,"name":"또래","href": "/meeting/category/8/87"}]
+  },
+  {
+    "id": 9,
+    "name": "재테크",
+    "href": "/meeting/category/9/9",
+    "thumbnail": "https://images.unsplash.com/photo-1546015018-8f2e2f225773?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
+    "count": 7,
+    "color": "red",
+    "tag": [{"id":1,"name":"재테크","href": "/meeting/category/9/88"},{"id":2,"name":"N잡","href": "/meeting/category/9/89"},{"id":3,"name":"부동산","href": "/meeting/category/9/90"},{"id":4,"name":"창업","href": "/meeting/category/9/91"},{"id":5,"name":"주식","href": "/meeting/category/9/92"}]
+  },
+  {
+    "id": 10,
+    "name": "외국어",
+    "href": "/meeting/category/10/10",
+    "thumbnail": "https://images.unsplash.com/photo-1512658740823-0ebb97b3b86e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "count": 26,
+    "color": "blue",
+    "tag": [{"id":1,"name":"영어","href": "/meeting/category/10/93"},{"id":2,"name":"언어교환","href": "/meeting/category/10/94"},{"id":3,"name":"일본어","href": "/meeting/category/10/95"},{"id":4,"name":"중국어","href": "/meeting/category/10/96"}]
+  }
+]
