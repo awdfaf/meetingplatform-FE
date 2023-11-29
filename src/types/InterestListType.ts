@@ -1,4 +1,11 @@
 export interface InterestListType {
-  key : number,
-  contents : string;
+  topCategoryId: number;
+  topCategoryName: string;
+  subCategories: SubCategoryType[];
+}
+
+export interface SubCategoryType {
+  id: number;
+  name: string;
+  checked: boolean;
 }

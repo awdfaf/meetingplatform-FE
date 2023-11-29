@@ -9,6 +9,7 @@ const nextConfig = {
     ACCESS_KEY:process.env.ACCESS_KEY,
     SECRET_KEY:process.env.SECRET_KEY,
     BUCKET_NAME:process.env.BUCKET_NAME,
+    NEXT_PUBLIC_API_URL:process.env.NEXT_PUBLIC_API_URL,
   },
 /*   env:{
     TOSS_SECRET_SECRET:process.env.TOSS_SECRET_SECRET
@@ -24,6 +25,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.munto.kr",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "loremflickr.com",
         port: "",
         pathname: "/**",
       },

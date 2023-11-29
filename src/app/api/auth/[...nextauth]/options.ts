@@ -20,7 +20,7 @@ export const options: NextAuthOptions = {
           console.log(credentials)
           if (!credentials?.loginId || !credentials?.password) return null
 
-          const res = await fetch("https://moa-backend.duckdns.org/api/v1/user/auth/login", {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/auth/login`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',

@@ -47,7 +47,7 @@ function CompanyCertVerify({ signUpData, setSignUpData, active, setActive, stepI
             const file = files[0];
             setMyFile(file);
             setLoding(true);
-            console.log(process.env.BUCKET_NAME, process.env.ACCESS_KEY, process.env.SECRET_KEY, process.env.AWS_REGION)
+            console.log( process.env.AWS_REGION)
             try {
                 const upload = new AWS.S3.ManagedUpload({
                 params: {

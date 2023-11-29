@@ -19,7 +19,7 @@ const Card6: FC<Card6Props> = ({ className = "h-full", post }) => {
 
   return (
     <div
-      className={`nc-Card6 relative flex group flex-row items-center sm:p-4 sm:rounded-3xl sm:bg-white sm:dark:bg-neutral-900 sm:border border-neutral-200 dark:border-neutral-700 ${className}`}
+      className={`nc-Card6 relative flex group flex-row items-center p-4 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 ${className}`}
     >
       <Link href={href} className="absolute inset-0 z-0"></Link>
       <div className="flex flex-col flex-grow">

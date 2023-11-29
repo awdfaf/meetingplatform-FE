@@ -13,14 +13,8 @@ import Swal from 'sweetalert2';
 
 
 export default function Loginarea() {
-  const router = useRouter();
   const query = useSearchParams();
   const callBackUrl = query?.get('callbackUrl');
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [modalContent, setModalContent] = useState<string>("");
-
-
-  const isClient = typeof window !== 'undefined';
 
   const [loginData, setLoginData] = useState<LogInFormDataType>({
     loginId: '',
@@ -32,52 +26,16 @@ export default function Loginarea() {
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === 'isAutoId') {
-      if (e.target.checked) {
-        handleLocalStorage(loginData.loginId);
-      } else {
-        // 체크박스가 해제되면 로컬 스토리지의 값도 삭제
-        localStorage.removeItem('autoLogin');
-      }
-    }
-    if (name === 'isAutoId' || name === 'isAutoLogin') {
 
-      setLoginData({
-        ...loginData,
-        [name]: e.target.checked
-      })
-    } else {
-
-      setLoginData({
-        ...loginData,
-        [name]: value
-      })
-    }
-  }
-
-  const handleLocalStorage = (loginId: String) => {
-    localStorage.setItem('autoLogin', loginId.toString())
+    setLoginData({
+      ...loginData,
+      [name]: value
+    })
   }
 
   const handlePwType = () => {
     setPwType(!pwType)
   }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const autoLogin = isClient && localStorage.getItem('autoLogin') || '';
-
-      if (autoLogin) {
-        setLoginData({
-          ...loginData,
-          loginId: autoLogin,
-          isAutoId: true
-        })
-      }
-    }
-  },
-    // []
-  )
 
   const handleLogin = async () => {
 
@@ -85,13 +43,13 @@ export default function Loginarea() {
     const result = await signIn('credentials', {
       loginId: loginData.loginId,
       password: loginData.password,
-      redirect: false,
+      redirect: true,
       callbackUrl: callBackUrl ? callBackUrl : '/'
     })
 
     if (result?.error) {
       Swal.fire({
-        text: `아이디 비빌번호를 확인 후 다시 시도해주세요.`,
+        text: `아이디 비밀번호를 확인 후 다시 시도해주세요.`,
         toast: true,
         position: "top",
         showConfirmButton: false,
@@ -134,11 +92,11 @@ export default function Loginarea() {
           onChange={handleOnChange}
           title="로그인을 위해 비밀번호를 입력해주세요." />
         <button type="button" onClick={handlePwType}>
-          <Link href="/" id="pw00_btn" className={styles.ico_eye_slash}>비밀번호 보기</Link>
+          <Link href="/moa-login" id="pw00_btn" className={styles.ico_eye_slash}>비밀번호 보기</Link>
         </button>
       </div>
       <div className='grid place-items-center mt-8'>
-        <button onClick={handleLogin} className='h-[44px] w-[300px] bg-[#4338ca] rounded-2xl grid place-items-center text-white font-semibold'>로그인</button>
+        <button onClick={handleLogin} className='h-[44px] w-[300px] bg-[#4338ca] rounded-full grid place-items-center text-white font-semibold'>로그인</button>
       </div>
       <ul className='grid place-items-center'>
         {/*         <li>
@@ -150,7 +108,7 @@ export default function Loginarea() {
 
         <li className='mt-4'>
           <span>아직 회원이 아니신가요?</span>
-          <a href="/join" className='text-blue-400 font-semibold underline'>회원가입</a>
+          <a href="/signup?step=1" className='text-blue-400 font-semibold underline'>회원가입</a>
         </li>
       </ul>
 

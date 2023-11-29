@@ -11,19 +11,10 @@ export default function MeetingDetailHeader() {
   const router = useRouter();
 
   return (
-    <>
-      <Navbar className="bg-white">
-        <NavbarBrand>
-          <button onClick={() => { router.back() }}>
-            <div className="mt-5 mb-5">
-              <ArrowBackIcon fontSize="large" sx={{ color: grey[900] }} />
-            </div>
-          </button>
-        </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
-
-        </NavbarContent>
-      </Navbar>
-    </>
+    <div className="w-fit sticky top-[65px] md:top-[45px] left-[50%] -translate-x-1/2 z-[999]">
+        <div className="mt-5 mb-5 bg-black rounded-full p-3 md:p-5 dark:bg-slate-300 animate-pulse cursor-pointer" onClick={() => { router.back() }}>
+          <ArrowBackIcon fontSize="medium" sx={{ color: 'white'}} />
+        </div>
+    </div>
   );
 }

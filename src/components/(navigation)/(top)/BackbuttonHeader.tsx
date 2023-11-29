@@ -15,7 +15,7 @@ export default function BackbuttonHeader(props:{contents:string}) {
       <Navbar className="bg-white">
         <NavbarBrand>
           <button onClick={() => { router.back() }}>
-            <div className="-ml-[30px]">
+            <div className="-ml-[5px]">
               <ArrowBackIcon fontSize="large" sx={{ color: grey[900] }}/>
             </div>
           </button>

@@ -71,7 +71,7 @@ export interface PostDataType {
   author?: any;
   date: string;
   href: any | string;
-  categories: any;
+  categories?: any;
   title: string;
   featuredImage: string ;
   desc?: string;

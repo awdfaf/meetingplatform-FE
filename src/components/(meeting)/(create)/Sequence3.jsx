@@ -1,8 +1,15 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { usePathname, useSearchParams, useRouter, useParams } from 'next/navigation'
 import Heading from '@/components/Heading/Heading';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import Paper from '@mui/material/Paper';
 
 
 export default function Sequence3(props) {
@@ -11,14 +18,29 @@ export default function Sequence3(props) {
   const searchParams = useSearchParams()
 
   const [inputTitle, setInputTitle] = useState(searchParams.get('Title') || '');
-  const { url, setUrl, updateQueryParams } = props;
+  const { url, setUrl, updateQueryParams, active, setActive } = props;
+
+  const ref = useRef()
+  const maxTabs = 10;
+
+  const handlePrevious = () => {
+    if (active > 1) {
+      setActive(active - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (active < maxTabs) {
+      setActive(active + 1);
+    }
+  };
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", "),
     [selectedKeys]
   );
 
-  const handleNext = () => {
+  const handleSave = () => {
     const baseURL = 'http://localhost:3000'; // Adjust as needed
 
     const updatedUrl = updateQueryParams(baseURL, url, {
@@ -30,7 +52,7 @@ export default function Sequence3(props) {
 
   return (
     <>
-          <div className='tracking-tighter mb-8'>
+      <div className='tracking-tighter mb-8'>
         <p className='text-lg font-semibold text-center'>모임의 이름을 입력해주세요</p>
         <p className="text-xs text-center text-gray-500">모임을 잘 나타낼 수 있는 이름을 선택하세요</p>
       </div>
@@ -45,9 +67,9 @@ export default function Sequence3(props) {
             onChange={(e) => setInputTitle(e.target.value)}
           />
         </div>
-        <button onClick={handleNext}>Next</button>
+
       </div>
-{/*       <Heading desc={""}>모임 제목을 입력해주세요</Heading>
+      {/*       <Heading desc={""}>모임 제목을 입력해주세요</Heading>
       <div className="flex flex-col gap-2">
         <p className="text-small text-default-500">Selected value: {selectedValue}</p>
         <input
@@ -57,6 +79,29 @@ export default function Sequence3(props) {
         />
         <button onClick={handleNext}>Next</button>
       </div> */}
+      {/* <Box sx={{ pb: 7 }} ref={ref}>
+        <CssBaseline />
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+          <BottomNavigation showLabels>
+            <BottomNavigationAction key="previous" label="이전" icon={<RestoreIcon />} onClick={() => { handleSave(); handlePrevious(); }} />
+            <BottomNavigationAction key="empty1" label="" />
+            <BottomNavigationAction key="empty2" label="" />
+            <BottomNavigationAction key="empty3" label="" />
+            <BottomNavigationAction key="next" label="다음" icon={<ArchiveIcon />} onClick={() => { handleSave(); handleNext(); }} />
+          </BottomNavigation>
+        </Paper>
+      </Box> */}
+          <div className='w-full bg-white p-2 flex justify-between fixed bottom-0 gap-1 text-sm right-[1px]'>
+          <button className='w-[30%] h-[44px] bg-[gray] grid place-items-center text-white font-semibold rounded-xl'
+          onClick={() => { handleSave(); handlePrevious(); }}>
+            이전
+          </button>
+
+          <button className="w-full h-[44px] grid place-items-center text-white font-semibold rounded-xl bg-[#4338ca]"
+          onClick={() => { handleSave(); handleNext(); }}>
+            다음
+          </button>
+        </div>
     </>
   );
 }

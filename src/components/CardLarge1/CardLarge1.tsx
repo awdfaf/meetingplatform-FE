@@ -19,8 +19,8 @@ export interface CardLarge1Props {
 const CardLarge1: FC<CardLarge1Props> = ({
   className = "",
   post,
-  onClickNext = () => {},
-  onClickPrev = () => {},
+  onClickNext = () => { },
+  onClickPrev = () => { },
 }) => {
   const { featuredImage, title, date, categories, author, readingTime, href } =
     post;

@@ -1,16 +1,15 @@
 import "./globals.css";
 import "@/styles/index.scss";
 import { Poppins } from "next/font/google";
-import Footer from "@/components/Footer/Footer";
-import SiteHeader from "./SiteHeader";
 import { Providers } from "./provider";
+// import Icon from "@/images/logo.png"
 
 export const metadata = {
   title: "모아 - 모임 플랫폼",
   description: "모임 플랫폼",
-  icons: {
-    icon: "/images/moamoa.png",
-  }
+  // icons: {
+  //   icon: Icon,
+  // }
 };
 
 const poppins = Poppins({
@@ -24,6 +23,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" className={poppins.className}>
       <body>

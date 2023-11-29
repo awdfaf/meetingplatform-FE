@@ -6,6 +6,7 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { useState } from 'react';
 import NcModal from '@/components/NcModal/NcModal';
 import SaveIcon from '@mui/icons-material/Save';
+import { useSession } from 'next-auth/react';
 
 export default function HeaderMeetCreate() {
 
@@ -14,6 +15,8 @@ export default function HeaderMeetCreate() {
   const router = useRouter()
   console.log(query?.get('step'));
   console.log(pathName);
+
+  const session = useSession();
 
   const searchParams = useSearchParams()
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,14 +27,15 @@ export default function HeaderMeetCreate() {
     //   return;
     // }
     try {
-      const response = await fetch(`https://moa-backend.duckdns.org/api/v1/`, {
-        method: 'POST',
+      const response = await fetch(`https://moamoa-backend.duckdns.org/api/v1/meeting-feature/temp-meeting`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           // 'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          tempurl: `/meeting/create/?${searchParams?.toString()}`,
+          userUuid: session.data?.user.userUuid,
+          tempUrl: `/meeting/create/?${searchParams?.toString()}`,
         }),
       });
 
@@ -50,7 +54,7 @@ export default function HeaderMeetCreate() {
       }
 
     } catch (error) {
-      console.error('Error fetching barcode:', error);
+      console.error('Error fetching:', error);
     }
   };
 
@@ -60,35 +64,35 @@ export default function HeaderMeetCreate() {
       width: 60,
       height: 60,
     },
-  
+
   };
 
   return (
     <header className='w-full fixed top-0 bg-white z-50 backdrop:blur-md'>
       <nav className='container'>
-      <NcModal
-        isOpenProp={isModalOpen}
-        onCloseModal={() => setIsModalOpen(false)}
-        modalTitle="임시 저장 하시겠습니까?"
-        renderContent={() => (
-          <div className='flex flex-col items-center'>
+        <NcModal
+          isOpenProp={isModalOpen}
+          onCloseModal={() => setIsModalOpen(false)}
+          modalTitle="임시 저장 하시겠습니까?"
+          renderContent={() => (
+            <div className='flex flex-col items-center'>
 
-            <SaveIcon className='text-[70px]'/>
+              <SaveIcon className='text-[70px]' />
 
-            <div className='flex justify-between mt-4 gap-10'>
-            <button className='bg-[#4338ca] text-white font-semibold py-2 px-8 rounded-full'
-            onClick={() => {
-              // console.log(searchParams.toString())
-              TempSave()
-              router.push(`/`)
-            }}>예</button>
+              <div className='flex justify-between mt-4 gap-10'>
+                <button className='bg-[#4338ca] text-white font-semibold py-2 px-8 rounded-full'
+                  onClick={() => {
+                    // console.log(searchParams.toString())
+                    TempSave()
+                    router.push(`/`)
+                  }}>예</button>
 
-            <button className='bg-[#eef2ff] font-semibold py-2  rounded-full w-[80px] border border-[#4338ca]'
-            onClick={() => { router.push('/') }}>아니오</button>
+                <button className='bg-[#eef2ff] font-semibold py-2  rounded-full w-[80px] border border-[#4338ca]'
+                  onClick={() => { router.push('/') }}>아니오</button>
+              </div>
             </div>
-          </div>
-        )}
-      />
+          )}
+        />
         <ul className='flex justify-between items-center py-5'>
           <li className='text-md font-bold text-[blue]'>
             모임생성

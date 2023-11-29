@@ -11,6 +11,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import Paper from '@mui/material/Paper';
 
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react';
 
 
 
@@ -19,11 +20,20 @@ export default function BottomNav() {
   const ref = React.useRef<HTMLDivElement>(null);
 
   let router = useRouter()
+  const session = useSession();
+
+  const handleHostClick = () => {
+    if (session.data) {
+      router.push(`/author/${session.data.user.userUuid}`);
+    } else {
+      // 사용자가 로그인하지 않았을 때 처리 (예: 로그인 페이지로 리디렉션)
+      router.push('/login');
+    }
+  }
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
@@ -32,12 +42,11 @@ export default function BottomNav() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="카테고리" icon={<RestoreIcon />} onClick={() => { router.push('/meeting/category/0/0') }} />
           <BottomNavigationAction label="모임 생성" icon={<FavoriteIcon />} onClick={() => { router.push('/meeting/create') }} />
-          <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+          <BottomNavigationAction label="호스트" icon={<ArchiveIcon />} onClick={handleHostClick} />
         </BottomNavigation>
       </Paper>
     </Box>
   );
 }
-

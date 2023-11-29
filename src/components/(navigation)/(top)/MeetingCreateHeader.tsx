@@ -20,7 +20,7 @@ export default function MeetingCreateHeader() {
     //   return;
     // }
     try {
-      const response = await fetch(`https://moa-backend.duckdns.org/api/v1/`, {
+      const response = await fetch(`https://moamoa-backend.duckdns.org/api/v1/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

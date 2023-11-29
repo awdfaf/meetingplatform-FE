@@ -14,9 +14,7 @@ import { ArrowUpIcon } from "@heroicons/react/24/solid";
 
 const demoTags = MEETING_TAGS.filter((_, i) => i < 9);
 
-export interface SingleContentProps { }
-
-const SingleContent: FC<SingleContentProps> = ({ }) => {
+const SingleContent = ({data} : {data?:any}) => {
   const endedAnchorRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLButtonElement>(null);
@@ -67,17 +65,17 @@ const SingleContent: FC<SingleContentProps> = ({ }) => {
   const showLikeAndCommentSticky =
     !endedAnchorEntry?.intersectionRatio &&
     (endedAnchorEntry?.boundingClientRect.top || 0) > 0;
-
+  console.log(data?.result)
   return (
-    <div className="relative">
-      <div className="nc-SingleContent space-y-10">
+    <div className="relative container">
         {/* ENTRY CONTENT */}
         <div
           id="single-entry-content"
-          className="prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert"
+          className="prose lg:prose-lg mx-auto dark:prose-invert max-w-screen-lg my-10"
           ref={contentRef}
         >
-          <SingleContentDemo />
+          <div dangerouslySetInnerHTML={{ __html: data?.result?.description }}></div>
+          {/* <SingleContentDemo data={data?.result?.description}/> */}
         </div>
 
         {/* TAGS */}
@@ -88,28 +86,24 @@ const SingleContent: FC<SingleContentProps> = ({ }) => {
         </div> */}
 
         {/* AUTHOR */}
-        <div className="max-w-screen-md mx-auto border-b border-t border-neutral-100 dark:border-neutral-700"></div>
-        <div className="max-w-screen-md mx-auto ">
-          <SingleAuthor />
-        </div>
+        <div className="mx-auto max-w-screen-lg border-b border-t border-neutral-100 dark:border-neutral-700"></div>
 
         {/* COMMENT FORM */}
         <div
           id="comments"
-          className="scroll-mt-20 max-w-screen-md mx-auto pt-5"
+          className="scroll-mt-20 mx-auto pt-5 max-w-screen-lg"
         >
-          <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+          {/* <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
             Responses (10)
-          </h3>
-          <SingleCommentForm />
+          </h3> */}
+          {/* <SingleCommentForm /> */}
         </div>
 
         {/* COMMENTS LIST */}
-        <div className="max-w-screen-md mx-auto">
-          <SingleCommentLists />
+        <div className="max-w-screen-lg mx-auto">
+          <SingleCommentLists hostUuid={data?.result?.hostUuid} />
           <div ref={endedAnchorRef}></div>
         </div>
-      </div>
       <div
         className={`sticky mt-8 bottom-8 z-40 justify-center ${showLikeAndCommentSticky ? "flex" : "hidden"
           }`}

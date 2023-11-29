@@ -53,8 +53,8 @@ export default function TossPaymentsButton() {
     try {
       if (paymentWidget) {
         await paymentWidget.requestPayment({
-          orderId: "wnansqjsgh8",
-          orderName: "moa8join",
+          orderId: "wnansqjsgh23",
+          orderName: "moa23join",
           customerName: "김토스",
           customerEmail: "customer123@gmail.com",
           customerMobilePhone: "01012341234",

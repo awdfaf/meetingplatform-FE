@@ -29,7 +29,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
     <div className="flex flex-col mb-8 relative">
       <Heading>{heading}</Heading>
       <div className="flex justify-between">
-        <Nav
+        {/* <Nav
           className="sm:space-x-2 rtl:space-x-reverse"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base"
         >
@@ -42,7 +42,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
               {item}
             </NavItem>
           ))}
-        </Nav>
+        </Nav> */}
         <Button className="!hidden md:!flex" pattern="white" sizeClass="px-6">
           <span>View all</span>
           <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />

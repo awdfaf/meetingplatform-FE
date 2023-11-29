@@ -18,7 +18,7 @@ import CreateMeetingBottomNav from "@/components/(navigation)/(bottom)/CreateMee
 import LinearProgress from '@mui/material/LinearProgress';
 import NcModal from "@/components/NcModal/NcModal";
 import { useSession } from "next-auth/react";
-
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 
 
@@ -44,68 +44,68 @@ export default function CreateMeeting() {
     return urlObj.pathname + urlObj.search;
   }
 
-  
+
 
   let tabs = [
     {
       id: 1,
       label: "모임 선택",
       progress: 10,
-      content: <Sequence1 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence1 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 2,
       label: "카테고리 선택",
       progress: 20,
-      content: <Sequence2 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence2 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 3,
       label: "모임 제목",
       progress: 30,
-      content: <Sequence3 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence3 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 4,
       label: "모임 소개",
       progress: 40,
-      content: <Sequence4 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence4 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 5,
       label: "날짜",
       progress: 50,
-      content: <Sequence5 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence5 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 6,
       label: "장소",
       progress: 60,
-      content: <Sequence6 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence6 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 7,
       label: "모집 방법",
       progress: 70,
-      content: <Sequence7 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence7 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 8,
       label: "멤버 조건",
       progress: 80,
-      content: <Sequence8 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence8 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 9,
       label: "참가비",
       progress: 90,
-      content: <Sequence9 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <Sequence9 url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
     {
       id: 10,
       label: "요약 및 패칭",
       progress: 100,
-      content: <SequenceLast url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} />
+      content: <SequenceLast url={url} setUrl={setUrl} updateQueryParams={updateQueryParams} active={active} setActive={setActive} />
     },
   ];
 
@@ -115,45 +115,39 @@ export default function CreateMeeting() {
 
 
     const getTempSave = async () => {
-      // if (!token) {
-      //   console.error("Token is not provided.");
-      //   return;
-      // }
+
       try {
-        const response = await fetch(``, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`
-          }
+        const response = await fetch(`https://moamoa-backend.duckdns.org/api/v1/meeting-feature/temp-meeting?userUuid=${session.data?.user.userUuid}`, {
+
         });
 
-        if (!response.ok) {
-          throw new Error(`Fetch failed with status: ${response.status}`);
-        }
+        // if (!response.ok) {
+        //   throw new Error(`Fetch failed with status: ${response.status}`);
+        // }
 
         const data = await response.json();
 
 
-        if (data.isSuccess === true) {
+        if (data.result.tempUrl !== null) {
 
           console.log(data);
-          setTempUrl(data.tempurl);
+          setTempUrl(data.result.tempUrl);
           setIsModalOpen(true);
         }
         else {
-
+          console.log(data);
         }
 
         // 서버 응답이 성공적으로 완료되면 모달 열기
 
 
       } catch (error) {
-        console.error('Error fetching barcode:', error);
+        console.error('Error fetching:', error);
       }
     };
 
-    // getTempSave();
+    getTempSave();
+
 
 
     setUrl(window.location.href);
@@ -172,9 +166,9 @@ export default function CreateMeeting() {
           </CardBody>
         </Card>
       </div>
-      <CreateMeetingBottomNav active={active} setActive={setActive} />
+      {/* <CreateMeetingBottomNav active={active} setActive={setActive} /> */}
 
-      <NcModal
+      {/* <NcModal
         isOpenProp={isModalOpen}
         onCloseModal={() => setIsModalOpen(false)}
         modalTitle="임시 저장 내용이 있습니다"
@@ -191,7 +185,33 @@ export default function CreateMeeting() {
             <button onClick={() => { setIsModalOpen(false) }}>아니오</button>
           </>
         )}
-      />
+      /> */}
+
+        <NcModal
+          isOpenProp={isModalOpen}
+          onCloseModal={() => setIsModalOpen(false)}
+          modalTitle="임시 저장한 내용이 있습니다."
+          renderContent={() => (
+            <div className='flex flex-col items-center'>
+
+              <DownloadForOfflineIcon className='text-[70px]' />
+              <div>내용을 불러오시겠습니까?</div>
+
+              <div className='flex justify-between mt-4 gap-10'>
+              <button className='bg-[#4338ca] text-white font-semibold py-2 px-8 rounded-full'
+              onClick={() => {
+              // 타입 강제 회피
+              // @ts-ignore
+              // router.push(`/meeting/create${data.params}`)
+              router.push(tempUrl)
+              setIsModalOpen(false)
+            }}>예</button>
+            <button className='bg-[#eef2ff] font-semibold py-2  rounded-full w-[80px] border border-[#4338ca]' 
+            onClick={() => { setIsModalOpen(false) }}>아니오</button>
+              </div>
+            </div>
+          )}
+        />
     </>
   );
 }

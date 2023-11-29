@@ -10,22 +10,24 @@ export default function Inquirylayout({ children }:
   const pathname = usePathname()
   return (
     <>
-      <BackbuttonHeader contents='아이디·비밀번호 찾기' />
-      <div className='flex'>
-        <div className={pathname === '/login/findIdPw' ? `w-1/2 h-8 leading-8 text-center border-b-[3px] bg-[#eef2ff] font-semibold` : `w-1/2 h-8 leading-8 text-center`}>
-          <a href='/login/findIdPw'>
-            아이디 찾기
-          </a>
-        </div>
+      <div className='mt-5'>
+        <BackbuttonHeader contents='아이디·비밀번호 찾기' />
+        <div className='flex mt-3'>
+          <div className={pathname === '/findIdPw' ? `w-1/2 h-10 leading-10 text-center border-[1px] font-semibold border-b-[#4338ca] border-b-[3px]` : `w-1/2 h-10 leading-10 border-[1px] text-center`}>
+            <a href='/findIdPw'>
+              아이디 찾기
+            </a>
+          </div>
 
-        <div className={pathname === '/login/findIdPw/findPw' ? `w-1/2 h-8 leading-8 text-center border-b-[3px] bg-[#eef2ff] font-semibold` : `w-1/2 h-8 leading-8 text-center`}>
-          <a href='/login/findIdPw/findPw'>
-            비밀번호 찾기
-          </a>
+          <div className={pathname === '/findIdPw/findPw' ? `w-1/2 h-10 leading-10 text-center  font-semibold border-[1px] border-b-[#4338ca] border-b-[3px]` : `w-1/2 h-10 leading-10 text-center border-[1px]`}>
+            <a href='/findIdPw/findPw'>
+              비밀번호 찾기
+            </a>
+          </div>
         </div>
-      </div>
-      <div>
-        {children}
+        <div>
+          {children}
+        </div>
       </div>
     </>
   )

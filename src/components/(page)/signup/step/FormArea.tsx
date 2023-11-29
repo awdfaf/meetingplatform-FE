@@ -142,7 +142,7 @@ export default function FormArea({ signUpData, setSignUpData, active, setActive,
 
 
     return (
-      <main className='container mt-10 mb-5'>
+      <main className='container mt-10 mb-20'>
         <div className='tracking-tighter mb-8'>
           <p className='text-lg font-semibold text-center'>개인정보 입력</p>
           <p className="text-xs text-center text-gray-500">정확한 정보를 입력하시면 보다 좋은 추천이 가능해집니다.</p>

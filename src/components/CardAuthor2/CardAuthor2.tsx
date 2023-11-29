@@ -34,7 +34,7 @@ const CardAuthor2: FC<CardAuthor2Props> = ({
         <h2
           className={`text-sm text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium`}
         >
-          {displayName}
+          {author && author.displayName ? author.displayName : author}
         </h2>
         <span
           className={`flex items-center mt-1 text-xs text-neutral-500 dark:text-neutral-400`}
@@ -43,16 +43,14 @@ const CardAuthor2: FC<CardAuthor2Props> = ({
           {readingTime && (
             <>
               <span
-                className={`hidden lg:inline mx-1 transition-opacity ${
-                  hoverReadingTime ? "opacity-0 group-hover:opacity-100" : ""
-                }`}
+                className={`hidden lg:inline mx-1 transition-opacity ${hoverReadingTime ? "opacity-0 group-hover:opacity-100" : ""
+                  }`}
               >
                 ·
               </span>
               <span
-                className={`hidden lg:inline transition-opacity ${
-                  hoverReadingTime ? "opacity-0 group-hover:opacity-100" : ""
-                }`}
+                className={`hidden lg:inline transition-opacity ${hoverReadingTime ? "opacity-0 group-hover:opacity-100" : ""
+                  }`}
               >
                 {readingTime} min read
               </span>

@@ -39,6 +39,7 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
   return (
     <div className={`nc-SectionLargeSlider relative ${className}`}>
       {!!heading && <Heading >{heading}</Heading>}
+      <p className="text-sm font-bold text-neutral-500 dark:text-neutral-400 text-center relative -top-[40px]">추천모임</p>
       {posts.map((item, index) => {
         if (indexActive !== index) return null;
         return (

@@ -1,11 +1,11 @@
-import Image from 'next/image'
 import React from 'react'
+import MoaIcon from './MoaIcon'
 
 
-export default function MoaLogo() {
+export default function MoaLogo({ className }: { className?: string }) {
   return (
-    <>
-      <Image src="/images/moa1.png" alt="moa Logo" width={80} height={70} />
-    </>
+    <div className={className ? className : ''}>
+       <MoaIcon />
+    </div>
   )
 }

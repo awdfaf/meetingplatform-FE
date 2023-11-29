@@ -1,13 +1,21 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { usePathname, useSearchParams, useRouter, useParams } from 'next/navigation'
 import Heading from '@/components/Heading/Heading';
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { experimentalStyled as styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+// import Box from '@mui/material/Box';
+// import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
+
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import Paper from '@mui/material/Paper';
 
 
 
@@ -32,13 +40,28 @@ export default function Sequence2(props) {
   const searchParams = useSearchParams()
 
   const [inputThemeCategoryId, setInputThemeCategoryId] = useState(searchParams.get('ThemeCategoryId') || '');
-  const { url, setUrl, updateQueryParams } = props;
+  const { url, setUrl, updateQueryParams, active, setActive } = props;
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", "),
     [selectedKeys]
   );
 
+  // const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef()
+  const maxTabs = 10;
+
+  const handlePrevious = () => {
+    if (active > 1) {
+      setActive(active - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (active < maxTabs) {
+      setActive(active + 1);
+    }
+  };
 
 
   // 아코디언
@@ -48,7 +71,7 @@ export default function Sequence2(props) {
 
 
 
-  const handleNext = () => {
+  const handleSave = () => {
     const baseURL = 'http://localhost:3000'; // Adjust as needed
 
     const updatedUrl = updateQueryParams(baseURL, url, {
@@ -74,10 +97,10 @@ export default function Sequence2(props) {
             onChange={(e) => setInputThemeCategoryId(e.target.value)}
           />
         </div>
-        <button onClick={handleNext}>Next</button>
+
       </div>
 
-{/*       <div className="flex flex-col gap-2">
+      {/*       <div className="flex flex-col gap-2">
         <p className="text-small text-default-500">Selected value: {selectedValue}</p>
         <input
           type="text"
@@ -87,7 +110,7 @@ export default function Sequence2(props) {
         />
         <button onClick={handleNext}>Next</button>
       </div> */}
-      <Accordion variant="splitted">
+      {/* <Accordion variant="splitted">
         <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -105,7 +128,32 @@ export default function Sequence2(props) {
         <AccordionItem key="3" aria-label="Accordion 3" title="Accordion 3">
           {defaultContent}
         </AccordionItem>
-      </Accordion>
+      </Accordion> */}
+      <>
+        {/* <Box sx={{ pb: 7 }} ref={ref}>
+          <CssBaseline />
+          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <BottomNavigation showLabels>
+              <BottomNavigationAction key="previous" label="이전" icon={<RestoreIcon />} onClick={() => { handleSave(); handlePrevious(); }} />
+              <BottomNavigationAction key="empty1" label="" />
+              <BottomNavigationAction key="empty2" label="" />
+              <BottomNavigationAction key="empty3" label="" />
+              <BottomNavigationAction key="next" label="다음" icon={<ArchiveIcon />} onClick={() => { handleSave(); handleNext(); }} />
+            </BottomNavigation>
+          </Paper>
+        </Box> */}
+        <div className='w-full bg-white p-2 flex justify-between fixed bottom-0 gap-1 text-sm right-[1px]'>
+          <button className='w-[30%] h-[44px] bg-[gray] grid place-items-center text-white font-semibold rounded-xl'
+          onClick={() => { handleSave(); handlePrevious(); }}>
+            이전
+          </button>
+
+          <button className="w-full h-[44px] grid place-items-center text-white font-semibold rounded-xl bg-[#4338ca]"
+          onClick={() => { handleSave(); handleNext(); }}>
+            다음
+          </button>
+        </div>
+      </>
     </>
   );
 }

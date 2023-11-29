@@ -15,21 +15,21 @@ const SectionMagazine: FC<SectionMagazine1Props> = ({
   heading = "모임 🎈 ",
   className = "",
 }) => {
+
+  console.log(posts);
+
   return (
     <div className={`nc-SectionMagazine1 ${className}`}>
       <HeaderFilter heading={heading} />
       {!posts.length && <span>Nothing we found!</span>}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         {/* {posts[0] && <Card2 size="large" post={posts[0]} />} */}
-        <div className="grid gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {posts
-            .filter((_, i) => i < 4 && i > 0)
             .map((item, index) => (
               <Card6 key={index} post={item} />
             ))}
         </div>
       </div>
-    </div>
   );
 };
 

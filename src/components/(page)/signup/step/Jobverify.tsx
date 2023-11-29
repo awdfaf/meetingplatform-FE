@@ -110,7 +110,6 @@ function Jobverify({ signUpData, setSignUpData, active, setActive, stepId }: IdI
   };
 
   const emailconfirm = async (e:any) => {
-    e.preventDefault();
     console.log(signUpData.companyEmail, codeInput)
     try {
         const response = await fetch('https://moa-backend.duckdns.org/api/v1/user/verify/email-confirm',

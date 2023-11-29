@@ -2,54 +2,166 @@ import React from "react";
 import SectionLargeSlider from "@/app/(home)/SectionLargeSlider";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
 import SectionSliderNewAuthors from "@/components/SectionSliderNewAthors/SectionSliderNewAuthors";
-import {
-  DEMO_POSTS,
-  DEMO_POSTS_AUDIO,
-  DEMO_POSTS_GALLERY,
-  DEMO_POSTS_VIDEO,
-} from "@/data/posts";
 import { MEETING_CATEGORIES } from "@/data/category";
 import { DEMO_AUTHORS } from "@/data/authors";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories/SectionSliderNewCategories";
-import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
-import SectionMagazine1 from "@/components/Sections/SectionMagazine1";
-import SectionAds from "@/components/Sections/SectionAds";
-import SectionMagazine7 from "@/components/Sections/SectionMagazine7";
-import SectionGridPosts from "@/components/Sections/SectionGridPosts";
-import SectionMagazine8 from "@/components/Sections/SectionMagazine8";
-import SectionMagazine9 from "@/components/Sections/SectionMagazine9";
-import SectionGridAuthorBox from "@/components/SectionGridAuthorBox/SectionGridAuthorBox";
-import SectionBecomeAnAuthor from "@/components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
-import SectionSubscribe2 from "@/components/SectionSubscribe2/SectionSubscribe2";
-import SectionVideos from "@/components/Sections/SectionVideos";
-import SectionLatestPosts from "@/components/Sections/SectionLatestPosts";
-import SectionMagazine2 from "@/components/Sections/SectionMagazine2";
 import SectionGridCategoryBox from "@/components/SectionGridCategoryBox/SectionGridCategoryBox";
 import BottomNav from "@/components/(navigation)/(bottom)/BottomNav";
-import Header from "@/components/(navigation)/(top)/Header";
 import SiteHeader from "../SiteHeader";
 import SectionMagazine from "@/components/Sections/SectionMagazine";
-import CreateBtn from "@/components/Button/CreateBtn";
 import Link from "next/link";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+
+interface Meeting {
+  id: number;
+  title: string;
+  hostUserUuid?: string;
+  hostNickname: string; // 호스트 닉네임 필드 추가
+  meetingDatetime: string; // 미팅 날짜 필드 추가
+  href: any;
+  meetingHeaderImageUrl: string; // 피처드 이미지 필드 추가 (URL 형식)
+  categories?: any; // 카테고리 필드 추가
+}
+
+interface MeetingListResponse {
+  result: Meeting[];
+  isSuccess: boolean;
+  message: string;
+}
+
+interface MeetingIdList {
+  meetingIdList: number[];
+  count: number;
+}
 
 
-//
-const MAGAZINE1_POSTS = DEMO_POSTS.filter((_, i) => i >= 8 && i < 16);
-const MAGAZINE2_POSTS = DEMO_POSTS.filter((_, i) => i >= 0 && i < 7);
-//
+async function getMeetingData() {
+  const responseOne = await fetch(`https://moamoa-backend.duckdns.org/api/v1/category/meeting`);
+  const dataOne = await responseOne.json() as MeetingIdList;
 
-const PageHome = ({ }) => {
+  const res = await fetch('https://moamoa-backend.duckdns.org/api/v1/meeting/list', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ids: dataOne.meetingIdList })
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+
+  return res.json()
+}
+
+
+async function getRecommendMeetingData() {
+
+  const session = await getServerSession(options)
+  console.log("uuid", session?.user.userUuid)
+  const data1 = await fetch(`https://moamoa-recomendation.duckdns.org/api/v1/recommendation`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_uuid: session?.user.userUuid })
+    });
+  const data2 = await data1.json();
+  console.log("data2", data2)
+  if (data2?.isSuccess === false) {
+    return null;
+  }
+  const data3 = await fetch('https://moamoa-backend.duckdns.org/api/v1/meeting/list', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ids: data2.result })
+  });
+
+  const data4 = await data3.json();
+
+  if(!data3.ok) {
+    return null;
+  }
+  const res = await data4 as MeetingListResponse;
+  return res
+}
+
+async function getInterst() {
+
+  const session = await getServerSession(options)
+  if (!session?.user) {
+    return;
+  }
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/category/user?userUuid=${session?.user.userUuid}`, { cache: "no-cache" });
+  const data = await res.json();
+  console.log("inter", data);
+  return data.result;
+}
+
+
+export default async function PageHome() {
+
+  const interstData:number[] = await getInterst();
+  if(!interstData || interstData.length === 0)
+  console.log("interstData", interstData)
+
+  const session = await getServerSession(options);
+  let postsToDisplay;
+
+  if (session?.user.userUuid ) {
+    // 로그인 상태일 때
+    console.log("session", session?.user.userUuid)
+    const recommendmeetingdata = await getRecommendMeetingData() as MeetingListResponse;
+    console.log("recommendmeetingdata", recommendmeetingdata)
+    if (recommendmeetingdata === null) {
+      const meetingdata = await getMeetingData() as MeetingListResponse;
+      const mappedMeetings = meetingdata.result.map(meeting => ({
+        id: meeting.id,
+        title: meeting.title,
+        author: meeting.hostNickname,
+        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+        href: `/meeting/detail/${meeting.id}`,
+        // featuredImage: meeting.meetingHeaderImageUrl,
+        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+      }));
+      postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    } else {
+      const mappedRecommendMeetings = recommendmeetingdata.result.map(meeting => ({
+        id: meeting.id,
+        title: meeting.title,
+        author: meeting.hostNickname,
+        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+        href: `/meeting/detail/${meeting.id}`,
+        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+        // featuredImage: meeting.meetingHeaderImageUrl,
+      }));
+      postsToDisplay = mappedRecommendMeetings.filter((_, i) => i < 3);
+    }
+  } else {
+    // 로그인하지 않은 상태일 때
+    const meetingdata = await getMeetingData() as MeetingListResponse;
+    const mappedMeetings = meetingdata.result.map(meeting => ({
+      id: meeting.id,
+      title: meeting.title,
+      author: meeting.hostNickname,
+      date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+      href: `/meeting/detail/${meeting.id}`,
+      // featuredImage: meeting.meetingHeaderImageUrl,
+      featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+    }));
+    postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+  }
+
+
   return (
     <div className="nc-PageHome relative">
-      <SiteHeader />
+      <SiteHeader interData = {interstData}/>
 
       <div className="container relative">
         <SectionLargeSlider
-
-          heading="호스트 추천"
+          heading="Recommendation"
           className="pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-20"
-          posts={DEMO_POSTS?.filter((_, i) => i < 3)}
+          posts={postsToDisplay?.filter((_, i) => i < 3)}
         />
 
         <div className="relative py-16">
@@ -71,104 +183,17 @@ const PageHome = ({ }) => {
         <div className="relative py-16">
           {/* <BackgroundSection /> */}
           <SectionSliderNewAuthors
-            heading="인기 호스트"
-            subHeading="Say hello to future creator potentials"
+            heading="Popular Hosts"
+            subHeading=""
             authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
           />
         </div>
-
-        {/* <SectionSliderNewCategories
-          className="py-16 lg:py-28"
-          heading="Top trending topics"
-          subHeading="Discover 233 topics"
-          categories={MEETING_CATEGORIES.filter((_, i) => i < 10)}
-          categoryCardType="card4"
-        /> */}
-
-        {/* <div className="relative py-16">
+        <div className="relative py-6 mb-10">
           <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card9"
-            heading="Explore latest audio articles"
-            subHeading="Click on the icon to enjoy the music or podcast 🎧"
-            posts={DEMO_POSTS_AUDIO.filter((_, i) => i > 3 && i < 10)}
-          />
-        </div> */}
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionMagazine className="py-16 lg:py-28" posts={MAGAZINE1_POSTS} />
+          <SectionMagazine className="py-6" posts={postsToDisplay} />
         </div>
-        {/* <SectionAds /> */}
-
-        {/* <SectionMagazine7
-          className="py-16 lg:py-28"
-          posts={DEMO_POSTS_GALLERY.filter((_, i) => i < 6)}
-        /> */}
       </div>
-
-      {/* <div className="dark bg-neutral-900 dark:bg-black dark:bg-opacity-20 text-neutral-100">
-        <div className="relative container">
-          <SectionGridPosts
-            className="py-16 lg:py-28"
-            headingIsCenter
-            postCardName="card10V2"
-            heading="Explore latest video articles"
-            subHeading="Hover on the post card and preview video 🥡"
-            posts={DEMO_POSTS_VIDEO.filter((_, i) => i > 5 && i < 12)}
-            gridClass="md:grid-cols-2 lg:grid-cols-3"
-          />
-        </div>
-      </div> */}
-      {/* 
-      <div className="container ">
-        <SectionMagazine8
-          className="py-16 lg:py-28"
-          posts={DEMO_POSTS_AUDIO.filter((_, i) => i < 6)}
-        />
-
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionMagazine9
-            posts={DEMO_POSTS_AUDIO.filter((_, i) => i >= 6 && i < 15)}
-          />
-        </div>
-
-
-
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionBecomeAnAuthor />
-        </div>
-
-        <SectionMagazine2
-          className="py-16 lg:py-24"
-          heading="Life styles 🎨 "
-          posts={MAGAZINE2_POSTS}
-        />
-
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card11"
-            heading="More design articles"
-            subHeading="Over 1118 articles "
-            posts={DEMO_POSTS.filter(
-              (p, i) => i > 3 && i < 25 && p.postType === "standard"
-            )}
-          />
-        </div>
-
-        <SectionSubscribe2 className="pt-16 lg:pt-28" />
-
-        <SectionVideos className="py-16 lg:py-28" />
-
-        <SectionLatestPosts className="pb-16 lg:pb-28" />
-      </div> */}
-      <Link href={'/meeting/create'}>
-        <CreateBtn />
-      </Link>
+      <BottomNav />
     </div>
   );
 };
-
-export default PageHome;

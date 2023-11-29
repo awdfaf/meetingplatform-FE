@@ -139,7 +139,7 @@ const Category: React.FC<CategoryProps> = ({ id }) => {
   console.log(posts);
   return (
     <>
-      <SiteHeader />
+      <SiteHeader interData={[]} />
       <div className={`nc-PageArchive`}>
         <div className="container pt-10 pb-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
           <div>

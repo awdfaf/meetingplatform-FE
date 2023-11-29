@@ -1,7 +1,6 @@
 "use client";
 
 import React, { FC } from "react";
-import Logo from "@/components/Logo/Logo";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import LangDropdown from "./LangDropdown";
 import AvatarDropdown from "./AvatarDropdown";
@@ -10,17 +9,22 @@ import NotifyDropdown from "./NotifyDropdown";
 import SwitchDarkMode from "../SwitchDarkMode/SwitchDarkMode";
 import Input from "../Input/Input";
 import SearchModal from "./SearchModal";
-import MoaLogo from "../Logo/MoaLogo";
+import Button from "../Button/Button";
+import Search from "../(search)/SearchModal"
 import Link from "next/link";
 import MoaIcon from "../Logo/MoaIcon";
+import { useSession } from "next-auth/react";
+import Loading from "../Button/Loading";
 
-
-// 헤더 2
-export interface MainNav2Props {
+export interface MainNavProps {
   className?: string;
 }
 
-const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
+const MainNav: FC<MainNavProps> = ({ className = "" }) => {
+
+  const session = useSession();
+  console.log("session.status" , session.status);
+  
   const renderSearchForm = () => {
     return (
       <div className="relative group">
@@ -61,7 +65,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   };
 
   return (
-    <div className="nc-MainNav2 relative z-10 bg-white dark:bg-slate-900 ">
+    <div className="nc-MainNav2 relative z-10 bg-white dark:bg-slate-900">
       <div className="container">
         <div className="h-20 flex justify-between">
           <div className="flex items-center md:hidden flex-1">
@@ -81,17 +85,39 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             </div>
           </div>
 
-          <div className="flex-1 flex items-center justify-end ">
-            <TemplatesDropdown />
-            <LangDropdown />
-            <SwitchDarkMode />
-            <NotifyDropdown className="hidden md:block" />
-            <AvatarDropdown />
-          </div>
+          {
+            session.status === "authenticated" ? (
+              <div className="flex-1 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1 rtl:space-x-reverse">
+                <SwitchDarkMode />
+                {/* <TemplatesDropdown />
+                <LangDropdown /> */}
+                <NotifyDropdown className="hidden md:block" />
+                <AvatarDropdown />
+              </div>
+            ) : session.status === "loading" ? (
+              <div className="flex-1 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1 rtl:space-x-reverse">
+                <Loading />
+              </div>
+            ) :
+            
+            (
+              <div className="flex-1 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1 rtl:space-x-reverse">
+                <SwitchDarkMode />
+                <Search />
+                <Button
+                  sizeClass="py-3 px-4 sm:px-6"
+                  href="/login"
+                  pattern="primary"
+                >
+                  로그인
+                </Button>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
   );
 };
 
-export default MainNav2;
+export default MainNav;

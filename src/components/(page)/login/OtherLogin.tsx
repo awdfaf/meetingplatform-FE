@@ -9,8 +9,6 @@ export default function OtherLogin() {
 
   const query = useSearchParams();
   const callBackUrl = query?.get('callbackUrl');
-  const session = useSession()
-  const router = useRouter();
 
 
   const handleLogin = async (provider: string) => {
@@ -20,16 +18,8 @@ export default function OtherLogin() {
         callbackUrl: callBackUrl ? callBackUrl : '/'
     })
 
-    console.log(result)
   };
   
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      router.push('/')
-    }
-  }
-  , [session])
-
   return (
     <div>
       <div className='pb-[40px]'>
