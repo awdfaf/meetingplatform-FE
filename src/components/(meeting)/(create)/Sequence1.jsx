@@ -38,7 +38,7 @@ export default function Sequence1(props) {
   );
 
   const handleSave = () => {
-    const baseURL = 'http://localhost:3000'; // Adjust as needed
+    const baseURL = 'https://meetingplatform-fe.vercel.app'; // Adjust as needed
 
     const updatedUrl = updateQueryParams(baseURL, url, {
       data: inputValue,
