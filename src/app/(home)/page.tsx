@@ -116,33 +116,44 @@ export default async function PageHome() {
 
   if (session?.user.userUuid ) {
     // 로그인 상태일 때
-    console.log("session", session?.user.userUuid)
-    const recommendmeetingdata = await getRecommendMeetingData() as MeetingListResponse;
-    console.log("recommendmeetingdata", recommendmeetingdata)
-    if (recommendmeetingdata === null) {
-      const meetingdata = await getMeetingData() as MeetingListResponse;
-      const mappedMeetings = meetingdata.result.map(meeting => ({
-        id: meeting.id,
-        title: meeting.title,
-        author: meeting.hostNickname,
-        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
-        href: `/meeting/detail/${meeting.id}`,
-        // featuredImage: meeting.meetingHeaderImageUrl,
-        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
-      }));
-      postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
-    } else {
-      const mappedRecommendMeetings = recommendmeetingdata.result.map(meeting => ({
-        id: meeting.id,
-        title: meeting.title,
-        author: meeting.hostNickname,
-        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
-        href: `/meeting/detail/${meeting.id}`,
-        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
-        // featuredImage: meeting.meetingHeaderImageUrl,
-      }));
-      postsToDisplay = mappedRecommendMeetings.filter((_, i) => i < 3);
-    }
+    // console.log("session", session?.user.userUuid)
+    // const recommendmeetingdata = await getRecommendMeetingData() as MeetingListResponse;
+    // console.log("recommendmeetingdata", recommendmeetingdata)
+    // if (recommendmeetingdata === null) {
+    //   const meetingdata = await getMeetingData() as MeetingListResponse;
+    //   const mappedMeetings = meetingdata.result.map(meeting => ({
+    //     id: meeting.id,
+    //     title: meeting.title,
+    //     author: meeting.hostNickname,
+    //     date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+    //     href: `/meeting/detail/${meeting.id}`,
+    //     // featuredImage: meeting.meetingHeaderImageUrl,
+    //     featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+    //   }));
+    //   postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    // } else {
+    //   const mappedRecommendMeetings = recommendmeetingdata.result.map(meeting => ({
+    //     id: meeting.id,
+    //     title: meeting.title,
+    //     author: meeting.hostNickname,
+    //     date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+    //     href: `/meeting/detail/${meeting.id}`,
+    //     featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+    //     // featuredImage: meeting.meetingHeaderImageUrl,
+    //   }));
+    //   postsToDisplay = mappedRecommendMeetings.filter((_, i) => i < 3);
+    // }
+    const meetingdata = await getMeetingData() as MeetingListResponse;
+    const mappedMeetings = meetingdata.result.map(meeting => ({
+      id: meeting.id,
+      title: meeting.title,
+      author: meeting.hostNickname,
+      date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+      href: `/meeting/detail/${meeting.id}`,
+      // featuredImage: meeting.meetingHeaderImageUrl,
+      featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+    }));
+    postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
   } else {
     // 로그인하지 않은 상태일 때
     const meetingdata = await getMeetingData() as MeetingListResponse;
