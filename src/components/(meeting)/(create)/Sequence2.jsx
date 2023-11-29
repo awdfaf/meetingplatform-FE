@@ -72,7 +72,7 @@ export default function Sequence2(props) {
 
 
   const handleSave = () => {
-    const baseURL = 'https://meetingplatform-fe.vercel.app/'; // Adjust as needed
+    const baseURL = 'https://meetingplatform-fe.vercel.app'; // Adjust as needed
 
     const updatedUrl = updateQueryParams(baseURL, url, {
       ThemeCategoryId: inputThemeCategoryId,

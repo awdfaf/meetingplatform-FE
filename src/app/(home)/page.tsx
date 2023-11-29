@@ -1,23 +1,17 @@
-import dynamic from "next/dynamic";
-
-// Dynamic imports
-const SectionLargeSlider = dynamic(() => import("@/app/(home)/SectionLargeSlider"));
-const BackgroundSection = dynamic(() => import("@/components/BackgroundSection/BackgroundSection"));
-const SectionSliderNewAuthors = dynamic(() => import("@/components/SectionSliderNewAthors/SectionSliderNewAuthors"));
-const SectionGridCategoryBox = dynamic(() => import("@/components/SectionGridCategoryBox/SectionGridCategoryBox"));
-const BottomNav = dynamic(() => import("@/components/(navigation)/(bottom)/BottomNav"));
-const SiteHeader = dynamic(() => import("../SiteHeader"));
-const SectionMagazine = dynamic(() => import("@/components/Sections/SectionMagazine"));
-const ButtonPrimary = dynamic(() => import("@/components/Button/ButtonPrimary"));
-
-// Non-dynamic imports (usually for smaller or essential modules)
 import React from "react";
+import SectionLargeSlider from "@/app/(home)/SectionLargeSlider";
+import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
+import SectionSliderNewAuthors from "@/components/SectionSliderNewAthors/SectionSliderNewAuthors";
 import { MEETING_CATEGORIES } from "@/data/category";
 import { DEMO_AUTHORS } from "@/data/authors";
+import SectionGridCategoryBox from "@/components/SectionGridCategoryBox/SectionGridCategoryBox";
+import BottomNav from "@/components/(navigation)/(bottom)/BottomNav";
+import SiteHeader from "../SiteHeader";
+import SectionMagazine from "@/components/Sections/SectionMagazine";
 import Link from "next/link";
+import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
-
 
 interface Meeting {
   id: number;
@@ -116,44 +110,33 @@ export default async function PageHome() {
 
   if (session?.user.userUuid ) {
     // 로그인 상태일 때
-    // console.log("session", session?.user.userUuid)
-    // const recommendmeetingdata = await getRecommendMeetingData() as MeetingListResponse;
-    // console.log("recommendmeetingdata", recommendmeetingdata)
-    // if (recommendmeetingdata === null) {
-    //   const meetingdata = await getMeetingData() as MeetingListResponse;
-    //   const mappedMeetings = meetingdata.result.map(meeting => ({
-    //     id: meeting.id,
-    //     title: meeting.title,
-    //     author: meeting.hostNickname,
-    //     date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
-    //     href: `/meeting/detail/${meeting.id}`,
-    //     // featuredImage: meeting.meetingHeaderImageUrl,
-    //     featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
-    //   }));
-    //   postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
-    // } else {
-    //   const mappedRecommendMeetings = recommendmeetingdata.result.map(meeting => ({
-    //     id: meeting.id,
-    //     title: meeting.title,
-    //     author: meeting.hostNickname,
-    //     date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
-    //     href: `/meeting/detail/${meeting.id}`,
-    //     featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
-    //     // featuredImage: meeting.meetingHeaderImageUrl,
-    //   }));
-    //   postsToDisplay = mappedRecommendMeetings.filter((_, i) => i < 3);
-    // }
-    const meetingdata = await getMeetingData() as MeetingListResponse;
-    const mappedMeetings = meetingdata.result.map(meeting => ({
-      id: meeting.id,
-      title: meeting.title,
-      author: meeting.hostNickname,
-      date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
-      href: `/meeting/detail/${meeting.id}`,
-      // featuredImage: meeting.meetingHeaderImageUrl,
-      featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
-    }));
-    postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    console.log("session", session?.user.userUuid)
+    const recommendmeetingdata = await getRecommendMeetingData() as MeetingListResponse;
+    console.log("recommendmeetingdata", recommendmeetingdata)
+    if (recommendmeetingdata === null) {
+      const meetingdata = await getMeetingData() as MeetingListResponse;
+      const mappedMeetings = meetingdata.result.map(meeting => ({
+        id: meeting.id,
+        title: meeting.title,
+        author: meeting.hostNickname,
+        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+        href: `/meeting/detail/${meeting.id}`,
+        // featuredImage: meeting.meetingHeaderImageUrl,
+        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+      }));
+      postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    } else {
+      const mappedRecommendMeetings = recommendmeetingdata.result.map(meeting => ({
+        id: meeting.id,
+        title: meeting.title,
+        author: meeting.hostNickname,
+        date: new Date(meeting.meetingDatetime).toLocaleDateString("ko-KR"),
+        href: `/meeting/detail/${meeting.id}`,
+        featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
+        // featuredImage: meeting.meetingHeaderImageUrl,
+      }));
+      postsToDisplay = mappedRecommendMeetings.filter((_, i) => i < 3);
+    }
   } else {
     // 로그인하지 않은 상태일 때
     const meetingdata = await getMeetingData() as MeetingListResponse;
