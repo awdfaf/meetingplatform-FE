@@ -28,7 +28,7 @@ export async function middleware(request) {
   request.nextUrl.pathname.startsWith('/meeting/create'))
     if (!isLoggedIn){
       // TODO : host 바꾸기
-      return NextResponse.redirect(new URL('http://localhost:3000/login'), request.url)
+      return NextResponse.redirect(new URL('https://meetingplatform-fe.vercel.app/login'), request.url)
     }
 
 
