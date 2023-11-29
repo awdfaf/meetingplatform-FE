@@ -147,7 +147,7 @@ export default async function PageHome() {
       // featuredImage: meeting.meetingHeaderImageUrl,
       featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
     }));
-    postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    postsToDisplay = mappedMeetings.filter((_, i) => i < 10);
   } else {
     // 로그인하지 않은 상태일 때
     const meetingdata = await getMeetingData() as MeetingListResponse;
@@ -160,7 +160,7 @@ export default async function PageHome() {
       // featuredImage: meeting.meetingHeaderImageUrl,
       featuredImage: `https://loremflickr.com/640/400?random=${meeting.id}`,
     }));
-    postsToDisplay = mappedMeetings.filter((_, i) => i < 3);
+    postsToDisplay = mappedMeetings.filter((_, i) => i < 10);
   }
 
 

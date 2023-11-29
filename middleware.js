@@ -24,12 +24,12 @@ export async function middleware(request) {
   // console.log(sessionToken)
 
   // meeting 페이지 접근시 로그인 안되어있으면 로그인 페이지로 이동
-  if ( request.nextUrl.pathname.startsWith('/meeting/participate') ||
-  request.nextUrl.pathname.startsWith('/meeting/create'))
-    if (!isLoggedIn){
-      // TODO : host 바꾸기
-      return NextResponse.redirect(new URL('https://meetingplatform-fe.vercel.app/login'), request.url)
-    }
+  // if ( request.nextUrl.pathname.startsWith('/meeting/participate') ||
+  // request.nextUrl.pathname.startsWith('/meeting/create'))
+  //   if (!isLoggedIn){
+  //     // TODO : host 바꾸기
+  //     return NextResponse.redirect(new URL('https://meetingplatform-fe.vercel.app/login'), request.url)
+  //   }
 
 
   // 접속로그 저장
